@@ -1,4 +1,5 @@
 @import url("photographer.css");
+@import url("utils.css");
 
 body {
     font-family: "DM Sans", sans-serif;
@@ -15,7 +16,7 @@ header {
 }
 
 h1 {
-    color: #901C1C;
+    color: $main;
     margin-right: 100px;
     font-size: 2.25rem;
     font-weight: 400;
@@ -33,23 +34,46 @@ h1 {
         grid-template-columns: 1fr 1fr 1fr;
         gap: 70px;
         margin-top: 100px;
+        margin-bottom: 119px;
 
-        article {
+        &--article {
             justify-self: center;
             display: flex;
+            gap: 3px;
             justify-content: center;
             align-items: center;
             flex-direction: column;
 
-
-            h2 {
-                color: #D3573C;
-                font-size: 36px;
-            }
-
-            img {
+            &--img {
+                flex-shrink: 0;
+                object-fit: cover;
                 height: 200px;
                 width: 200px;
+                border-radius: 50%;
+                overflow: hidden;
+            }
+
+            &--name {
+                color: $sec;
+                font-size: 2.25rem;
+                margin: 0px;
+            }
+
+            &--loc {
+                font-size: 0.813rem;
+                color: $main;
+                margin: 0px;
+            }
+
+            &--tagline {
+                font-size: 0.625rem;
+                margin: 0px;
+            }
+
+            &--price {
+                font-size: 0.563rem;
+                color: $third-font;
+                margin: 0px;
             }
         }
     }
