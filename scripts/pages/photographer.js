@@ -23,32 +23,36 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function displayPhotographerDetails(photographerData, container) {
         // Elements recovery and creation
+        const div = document.createElement('div');
+        div.classList.add('photograph__header--details');
+
+        const h2 = document.createElement('h2');
+        h2.textContent = photographerData.name;
+        h2.setAttribute("aria-label", photographerData.name)
+        h2.classList.add('photograph__header--details--name');
+
+        const h3 = document.createElement('h3');
+        h3.textContent = photographerData.city + ", " + photographerData.country;
+        h3.setAttribute("aria-label", "Localisation de " + photographerData.name + ":" + photographerData.city + ", " + photographerData.country)
+        h3.classList.add('photograph__header--details--loc');
+
+        const h4 = document.createElement('h4');
+        h4.textContent = photographerData.tagline;
+        h4.setAttribute("aria-label", "Slogan de " + photographerData.name + ": " + photographerData.tagline)
+        h4.classList.add('photograph__header--details--tagline');
+
         const img = document.createElement('img');
         img.setAttribute("src", "../../assets/photographers/" + photographerData.portrait);
         img.setAttribute("alt", "Portrait de " + photographerData.name);
         img.setAttribute("aria-label", "Portrait de " + photographerData.name)
         img.classList.add('photograph__header--img');
 
-        const h2 = document.createElement('h2');
-        h2.textContent = photographerData.name;
-        h2.setAttribute("aria-label", photographerData.name)
-        h2.classList.add('photograph__header--name');
-
-        const h3 = document.createElement('h3');
-        h3.textContent = photographerData.city + ", " + photographerData.country;
-        h3.setAttribute("aria-label", "Localisation de " + photographerData.name + ":" + photographerData.city + ", " + photographerData.country)
-        h3.classList.add('photograph__header--loc');
-
-        const h4 = document.createElement('h4');
-        h4.textContent = photographerData.tagline;
-        h4.setAttribute("aria-label", "Slogan de " + photographerData.name + ": " + photographerData.tagline)
-        h4.classList.add('photograph__header--tagline');
-
         // Add elements to the container
+        container.appendChild(div)
+        div.appendChild(h2);
+        div.appendChild(h3);
+        div.appendChild(h4);
         container.appendChild(img);
-        container.appendChild(h2);
-        container.appendChild(h3);
-        container.appendChild(h4);
 
         // Keyboard navigation
         container.setAttribute('tabindex', '0');
