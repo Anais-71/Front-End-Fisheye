@@ -1,37 +1,44 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
-    <meta charset="utf-8">
-    <link rel="icon" type="image/png" href="assets/favicon.png">
-    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-    <title>Fisheye - photographe </title>
-  </head>
-  <body>
-    <header>
-      <img src="assets/images/logo.png" class="logo" />
-    </header>
-    <main id="main">
-      <div class="photograph__header">
-        <button class="contact__button" onclick="displayModal()">Contactez-moi</button>
-      </div>
-    </main>
-    <div class="contact" id="contact_modal">
-			<div class="contact__modal">
-				<header>
-          <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
-        </header>
-				<form>
-					<div>
-						<label>Prénom</label>
-						<input />
-					</div>
-          <button class="contact__button">Envoyer</button>
-				</form>
-			</div>
-		</div>
-    <script src="/scripts/pages/photographer.js"></script>
-    <script src="/scripts/utils/contactForm.js"></script>
-  </body>
+
+<head>
+  <link href="css/style.css" rel="stylesheet" type="text/css" />
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+  <title>Fisheye - photographe </title>
+</head>
+
+<body>
+  <header>
+    <a href="index.html" aria-label="Page d'accueil">
+      <img src="assets/images/logo.png" class="logo" alt="fisheye logo">
+    </a>
+  </header>
+  <main id="main">
+    <div class="photograph__header">
+      <button class="header--button" onclick="displayModal()" aria-label="Ouvrir la fenêtre de contact" role="button"
+        onkeydown="if(event.keyCode===13 || event.keyCode===32){displayModal();}" tabindex="0">Contactez-moi</button>
+    </div>
+  </main>
+  <div class="contact" id="contact_modal">
+    <div class="contact__modal">
+      <header>
+        <h2>Contactez-moi</h2>
+        <img src="assets/icons/close.svg" onclick="closeModal()" />
+      </header>
+      <form>
+        <div>
+          <label for="first">Prénom</label>
+          <input type="text" id="first" name="first">
+        </div>
+        <button class="contact__button" onclick="displayModal()" aria-label="Envoyer le message" role="button"
+          onkeydown="if(event.keyCode===13 || event.keyCode===32){displayModal();}" tabindex="0">Envoyer</button>
+      </form>
+    </div>
+  </div>
+  <script src="/scripts/pages/photographer.js"></script>
+  <script src="/scripts/utils/contactForm.js"></script>
+</body>
+
 </html>

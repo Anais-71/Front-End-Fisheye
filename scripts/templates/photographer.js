@@ -1,13 +1,20 @@
 function photographerTemplate(data) {
-    const { name, city, country, tagline, price, portrait } = data;
+    const { name, id, city, country, tagline, price, portrait } = data;
 
     const picture = `assets/photographers/${portrait}`;
     const templatePicture = "assets/photographers/account.png";
+
+    function redirectToPhotographerPage() {
+        const url = `photographer.html?photographer_id=${id}`;
+        console.log(url);
+        window.location.href = url;
+    }
 
     function getUserCardDOM() {
         //photographer card creation
         const article = document.createElement('article');
         article.classList.add('photographer__section--article');
+        article.addEventListener('click', redirectToPhotographerPage);
         
         // Keyboard navigation
         article.setAttribute('tabindex', '0');
@@ -46,25 +53,31 @@ function photographerTemplate(data) {
         //name recovery
         const h2 = document.createElement('h2');
         h2.textContent = name;
-        h2.setAttribute("aria-label", "Nom du photographe")
+        h2.setAttribute("aria-label", name)
         h2.classList.add('photographer__section--article--name')
+
+        //ID
+        const id = document.createElement('id');
+        id.textContent = id;
+        id.style.display = "none";
+        id.classList.add('photographer__section--article--id')
         
         //location recovery
         const h3 = document.createElement('h3');
         h3.textContent = city + ", " + country;
-        h3.setAttribute("aria-label", "Localisation de " + name)
+        h3.setAttribute("aria-label", "Localisation de " + name + ":" + city + ", " + country)
         h3.classList.add('photographer__section--article--loc')
         
         //tagline recovery
         const h4 = document.createElement('h4');
         h4.textContent = tagline;
-        h4.setAttribute("aria-label", "Slogan de " + name)
+        h4.setAttribute("aria-label", "Slogan de " + name + ":" + tagline)
         h4.classList.add('photographer__section--article--tagline')
         
         //price
         const p = document.createElement('p');
         p.textContent = price + "€/jour";
-        p.setAttribute("aria-label", "Prix journalier de " + name)
+        p.setAttribute("aria-label", "Prix journalier de " + name+ ":" + price)
         p.classList.add('photographer__section--article--price')
 
         //DOM elements creation
@@ -77,5 +90,5 @@ function photographerTemplate(data) {
 
         return (article);
     }
-    return { name, picture, city, country, tagline, price, getUserCardDOM }
+    return { name, id, picture, city, country, tagline, price, getUserCardDOM }
 }
