@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Parent element recovery
-    const photographerDetailsContainer = document.querySelector('.photograph__header');
+    const Container = document.querySelector('.photograph__header');
+    const DetailsContainer = document.querySelector('.photograph__header--details');
+    const ImgContainer = document.querySelector('.photograph__header--img');
 
     // Photographer ID recovery from URL
     const params = new URLSearchParams(window.location.search);
@@ -14,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // Find the photographer data by ID
             const photographerData = data.photographers.find(photographer => photographer.id === parseInt(photographerId));
             if (photographerData) {
-                displayPhotographerDetails(photographerData, photographerDetailsContainer);
+                displayPhotographerDetails(photographerData, Container);
             }
         })
         .catch(error => {
@@ -23,9 +25,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function displayPhotographerDetails(photographerData, container) {
         // Elements recovery and creation
-        const div = document.createElement('div');
-        div.classList.add('photograph__header--details');
-
         const h2 = document.createElement('h2');
         h2.textContent = photographerData.name;
         h2.setAttribute("aria-label", photographerData.name)
@@ -48,11 +47,10 @@ document.addEventListener("DOMContentLoaded", function () {
         img.classList.add('photograph__header--img');
 
         // Add elements to the container
-        container.appendChild(div)
-        div.appendChild(h2);
-        div.appendChild(h3);
-        div.appendChild(h4);
-        container.appendChild(img);
+        DetailsContainer.appendChild(h2);
+        DetailsContainer.appendChild(h3);
+        DetailsContainer.appendChild(h4);
+        ImgContainer.appendChild(img);
 
         // Keyboard navigation
         container.setAttribute('tabindex', '0');

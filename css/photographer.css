@@ -1,3 +1,4 @@
+@import url("utils.css");
 .contact__modal {
   display: none;
 }
@@ -6,9 +7,46 @@
   background-color: #FAFAFA;
   height: 300px;
   margin: 0 100px;
+  display: flex;
+  flex-direction: row;
+  padding-left: 50px;
+  padding-right: 50px;
+  align-items: center;
+  position: relative;
 }
-
-.contact__button {
+.photograph__header--img {
+  display: flex;
+  flex-shrink: 0;
+  object-fit: cover;
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  position: absolute;
+  right: 50px;
+}
+.photograph__header--details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 19px;
+}
+.photograph__header--details--name {
+  color: #D3573C;
+  font-size: 4rem;
+  margin: 0px;
+  text-overflow: wrap;
+}
+.photograph__header--details--loc {
+  font-size: 1.5rem;
+  color: #901C1C;
+  margin: 0px;
+}
+.photograph__header--details--tagline {
+  font-size: 1.125rem;
+  color: #525252;
+  margin: 0px;
+}
+.photograph__header--button {
   font-size: 20px;
   font-weight: bold;
   color: white;
@@ -19,6 +57,9 @@
   background-color: #901C1C;
   border-radius: 5px;
   cursor: pointer;
+  position: absolute;
+  left: 535px;
+  right: 535px;
 }
 
 .modal {
@@ -67,4 +108,4 @@ form input {
   height: 68px;
   border: none;
   border-radius: 5px;
-}/*# sourceMappingURL=photographer.css.map */
+}

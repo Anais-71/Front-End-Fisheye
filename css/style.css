@@ -29,6 +29,7 @@ h1 {
   grid-template-columns: 1fr 1fr 1fr;
   gap: 70px;
   margin-top: 100px;
+  margin-bottom: 119px;
 }
 .photographer__section--article {
   justify-self: center;
@@ -43,6 +44,8 @@ h1 {
   object-fit: cover;
   height: 200px;
   width: 200px;
+  border-radius: 50%;
+  overflow: hidden;
 }
 .photographer__section--article--name {
   color: #D3573C;
