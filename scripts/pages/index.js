@@ -1,7 +1,7 @@
 async function getPhotographers() {
-    const reponse = await fetch("../../data/photographers.json");
-    const photographer = await reponse.json();
-    return photographer;
+    const response = await fetch('https://anais-71.github.io/Front-End-Fisheye/data/photographers.json');
+    const photographers = await response.json();
+    return photographers;
 }
 
 async function displayData(photographers) {
