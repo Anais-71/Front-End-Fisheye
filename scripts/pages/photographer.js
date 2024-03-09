@@ -17,7 +17,7 @@ class LikesObserver {
     updatePrice() {
         const photographerPrice = this.photographerData.price;
         this.priceElement.innerHTML = `${this.totalLikes}   
-        <span><i class="fa-solid fa-heart"></i></span> 
+        <span class="price__fav" aria-label="Icône coeur"><i class="fa-solid fa-heart"></i></span> 
         <span class="price__wrapper" aria-label="Prix journalier ${photographerPrice} euros par jour">${photographerPrice} € / jour</span>`;
     }
 }
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Function to display media
     function displayPhotographerMedia(data, photographerData, MediaContainer, observer) {
-        const photographerName = photographerData.name.split(/[\s-]+/)[0];
+        const photographerName = photographerData.name.split(/[\s]+/)[0];
         let totalLikes = 0;
 
         const filteredMedia = data.media.filter(media => media.photographerId === photographerData.id);

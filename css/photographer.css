@@ -84,8 +84,6 @@
   justify-content: space-between;
   align-items: center;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   width: 350px;
 }
 .media .media__item--desc--title {
@@ -94,6 +92,9 @@
   font-weight: 400;
   margin: 0px;
   flex: 1;
+  max-width: 282px;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .media .media__item--desc--likes {
   font-size: 1.5rem;
@@ -122,8 +123,12 @@
   align-items: center;
   padding-left: 31px;
 }
+.price__fav {
+  margin-left: 5px;
+}
 .price__wrapper {
-  justify-content: flex-end;
+  position: absolute;
+  right: 34px;
 }
 
 .modal {
