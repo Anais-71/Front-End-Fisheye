@@ -1,5 +1,4 @@
 @import "./utils/utils.scss";
-@import "./modules/modal.scss";
 
 .photograph {
 
@@ -144,5 +143,88 @@
     &__wrapper {
         position: absolute;
         right: 34px;
+    }
+}
+
+.contact {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: none;
+
+    &__modal {
+        width: 40%;
+        height: 88%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transform: translate(-50%, -50%);
+        background-color: $box-background;
+        padding: 35px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+
+        &--header {
+            margin: Opx;
+            justify-content: space-between;
+
+            img {
+                cursor: pointer;
+            }
+
+            h2 {
+                font-size: 3.5rem;
+                font-weight: 400;
+                color: #312E2E;
+                margin: 0px;
+            }
+        }
+
+        &--form {
+            fieldset {
+                border: none;
+                display: flex;
+                flex-direction: column;
+
+                input {
+                    border-radius: 5px;
+                    background: #FFF;
+                    width: 567px;
+                    height: 50px;
+                    border: none;
+                    margin-bottom: 5px;
+                }
+
+                label {
+                    color: #312E2E;
+                    font-size: 1.75rem;
+                    font-weight: 400;
+                }
+            
+                textarea {
+                    width: 567px;
+                    height: 110px;
+                    border: none;
+                    border-radius: 5px;
+                }
+            }
+        }
+    }
+
+    &__button {
+        width: 170px;
+        height: 69px;
+        color: #FFF;
+        border-radius: 5px;
+        background-color: $main;
+        border: none;
+        text-align: center;
+        font-size: 1.125rem;
+        font-weight: 700;
+        margin-left: 12px;
     }
 }
