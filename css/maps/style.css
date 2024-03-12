@@ -1,4 +1,5 @@
-@import url("utils.css");
+@import "../utils/utils.css";
+
 .contact__modal {
   display: none;
 }
@@ -131,50 +132,117 @@
   right: 34px;
 }
 
-.modal {
+.contact {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: none;
+}
+.contact__modal {
   border-radius: 5px;
-  background-color: #DB8876;
-  width: 50%;
+  width: 669px;
+  height: 900px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   padding: 35px;
   margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #DB8876;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
-.modal header {
+.contact__modal--header {
   justify-content: space-between;
   width: 100%;
 }
-.modal header img {
+.contact__modal--header img {
   cursor: pointer;
 }
-.modal header h2 {
-  font-size: 64px;
-  font-weight: normal;
-  text-align: center;
+.contact__modal--header h2 {
+  font-size: 4rem;
+}
+.contact__modal--form fieldset {
+  border: none;
 }
 
-form {
+.hidden {
+  display: none;
+}
+
+body {
+  font-family: "DM Sans", sans-serif;
+  margin: 0;
+}
+
+header {
   display: flex;
-  width: 100%;
-  flex-direction: column;
-  align-items: flex-start;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 90px;
 }
-form label {
-  color: #312E2E;
-  font-size: 36px;
+
+h1 {
+  color: #901C1C;
+  margin-right: 100px;
+  font-size: 2.25rem;
+  font-weight: 400;
 }
-form div {
+
+.logo {
+  height: 50px;
+  margin-left: 100px;
+}
+
+.photographer__section {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 70px;
+  margin-top: 100px;
+  margin-bottom: 119px;
+}
+.photographer__section--article {
+  justify-self: center;
   display: flex;
+  gap: 3px;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
-  width: 100%;
-  align-items: self-start;
-  margin-bottom: 26px;
 }
-form input {
-  width: 100%;
-  height: 68px;
-  border: none;
-  border-radius: 5px;
+.photographer__section--article--img {
+  flex-shrink: 0;
+  object-fit: cover;
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  overflow: hidden;
 }
+.photographer__section--article--name {
+  color: #D3573C;
+  font-size: 2.25rem;
+  margin: 0px;
+}
+.photographer__section--article--loc {
+  font-size: 0.813rem;
+  color: #901C1C;
+  margin: 0px;
+}
+.photographer__section--article--tagline {
+  font-size: 0.625rem;
+  margin: 0px;
+}
+.photographer__section--article--price {
+  font-size: 0.563rem;
+  color: #525252;
+  margin: 0px;
+}/*# sourceMappingURL=style.css.map */

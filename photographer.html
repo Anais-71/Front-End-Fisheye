@@ -2,7 +2,8 @@
 <html>
 
 <head>
-  <link href="css/style.css" rel="stylesheet" type="text/css" />
+  <link href="css/maps/style.css" rel="stylesheet">
+  <link href="css/maps/photographer.css" rel="stylesheet">
   <meta charset="utf-8">
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
@@ -11,7 +12,7 @@
 </head>
 
 <body>
-  <header>
+  <header class="header">
     <a href="index.html" aria-label="Page d'accueil">
       <img src="assets/images/logo.png" class="logo" alt="fisheye logo">
     </a>
@@ -19,8 +20,9 @@
   <main id="main">
     <div class="photograph__header">
       <div class="photograph__header--details"></div>
-      <button class="photograph__header--button" onclick="displayModal()" aria-label="Ouvrir la fenêtre de contact" role="button"
-        onkeydown="if(event.keyCode===13 || event.keyCode===32){displayModal();}" tabindex="0">Contactez-moi</button>
+      <button class="photograph__header--button" onclick="displayModal()" aria-label="Ouvrir la fenêtre de contact"
+        role="button" onkeydown="if(event.keyCode===13 || event.keyCode===32){displayModal();}"
+        tabindex="0">Contactez-moi</button>
       <div class="photograph__header--img"></div>
     </div>
     <div class="media">
@@ -30,15 +32,33 @@
   </main>
   <div class="contact" id="contact_modal">
     <div class="contact__modal">
-      <header>
+      <header class="contact__modal--header">
         <h2>Contactez-moi</h2>
-        <img src="assets/icons/close.svg" onclick="closeModal()" />
+        <img class="contact__modal--close" src="assets/icons/close.svg" onclick="closeModal()"
+          alt="Bouton de fermeture du formulaire" />
       </header>
-      <form>
-        <div>
-          <label for="first">Prénom</label>
-          <input type="text" id="first" name="first">
-        </div>
+      <form class="contact__modal--form" aria-hidden="true">
+        <fieldset>
+          <legend class="hidden">Informations personnelles</legend>
+          <div class="contact__modal--form--fields">
+            <label for="first" id="first-label">Prénom</label>
+            <input type="text" id="first" name="first" aria-labelledby="first-label" placeholder="Prénom">
+
+            <label for="last" id="last-label">Nom</label>
+            <input type="text" id="last" name="last" aria-labelledby="last-label" placeholder="Nom">
+
+            <label for="email" id="email-label">Email</label>
+            <input type="email" id="email" name="email" aria-labelledby="email-label" placeholder="Adresse email">
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend class="hidden">Votre message</legend>
+          <div class="contact__modal--form__fields">
+            <label for="message" id="message-label">Votre message</label>
+            <textarea id="message" name="message" aria-labelledby="message-label"
+              placeholder="Entrez ici votre message"></textarea>
+          </div>
+        </fieldset>
         <button class="contact__button" onclick="displayModal()" aria-label="Envoyer le message" role="button"
           onkeydown="if(event.keyCode===13 || event.keyCode===32){displayModal();}" tabindex="0">Envoyer</button>
       </form>
@@ -46,6 +66,7 @@
   </div>
   <script src="/scripts/pages/photographer.js"></script>
   <script src="/scripts/utils/contactForm.js"></script>
+  <script src="/scripts/modal/modal.js"></script>
 </body>
 
 </html>
