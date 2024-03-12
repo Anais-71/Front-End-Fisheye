@@ -9,6 +9,7 @@ const firstName = form.elements["first"];
 const lastName = form.elements["last"];
 const email = form.elements["email"];
 const message = form.elements["message"];
+const submitButton = form.querySelector("[type='submit']");
 
 // Open modal
 function displayModal() {
@@ -16,6 +17,7 @@ function displayModal() {
     header.setAttribute("aria-hidden", "true");
     main.setAttribute("aria-hidden", "true");
     form.setAttribute("aria-hidden", "false");
+    firstName.focus();
 }
 
 openButton.addEventListener("click", displayModal);
@@ -31,24 +33,84 @@ function closeModal() {
 closeButton.addEventListener("click", closeModal);
 
 // Form management
-form.addEventListener('submit', function(event) {
-    event.preventDefault();
-  
-    const firstNameValue = form.elements["first"].value;
-    const lastNameValue = form.elements["last"].value;
-    const emailValue = form.elements["email"].value;
-    const messageValue = form.elements["message"].value;
+function submitForm() {
+    const firstNameValue = firstName.value;
+    const lastNameValue = lastName.value;
+    const emailValue = email.value;
+    const messageValue = message.value;
   
     console.log("Prénom:", firstNameValue);
     console.log("Nom:", lastNameValue);
     console.log("Email:", emailValue);
     console.log("Message:", messageValue);
-  });
+
+    closeModal();
+}
+
+// Prevent default
+form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    submitForm();
+});
 
 // Close modal with escape key
 document.addEventListener('keydown', e => {
-    const keyCode = e.keyCode ? e.keyCode : e.which;
-    if (form.getAttribute('aria-hidden') == 'false' && keyCode === 27) {
+    const key = e.key;
+    if (form.getAttribute('aria-hidden') == 'false' && key === 'Escape') {
         closeModal();
+    }
+});
+
+// Submit with enter key
+form.addEventListener('keydown', e => {
+    const key = e.key;
+
+    if (key === 'Enter') {
+        e.preventDefault();
+        submitForm();
+    }
+});
+
+// Keyboard navigation
+form.addEventListener('keydown', e => {
+    const key = e.key;
+    const shiftKey = e.shiftKey;
+
+    if (key === 'Tab') {
+        if (shiftKey) { // Shift + Tab
+            if (document.activeElement === firstName) {
+                e.preventDefault();
+                closeButton.focus();
+            } else if (document.activeElement === lastName) {
+                e.preventDefault();
+                firstName.focus();
+            } else if (document.activeElement === email) {
+                e.preventDefault();
+                lastName.focus();
+            } else if (document.activeElement === message) {
+                e.preventDefault();
+                email.focus();
+            } else if (document.activeElement === submitButton) {
+                e.preventDefault();
+                message.focus();
+            }
+        } else { // Tab
+            if (document.activeElement === closeButton) {
+                e.preventDefault();
+                firstName.focus();
+            } else if (document.activeElement === firstName) {
+                e.preventDefault();
+                lastName.focus();
+            } else if (document.activeElement === lastName) {
+                e.preventDefault();
+                email.focus();
+            } else if (document.activeElement === email) {
+                e.preventDefault();
+                message.focus();
+            } else if (document.activeElement === message) {
+                e.preventDefault();
+                submitButton.focus();
+            }
+        }
     }
 });
