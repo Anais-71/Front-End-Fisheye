@@ -30,6 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const ImgContainer = document.querySelector('.photograph__header--img');
     const MediaContainer = document.querySelector('.media');
     const priceElement = document.querySelector('.price');
+    const modalHeader = document.querySelector('.contact__modal--header');
 
     // Recovery of photographer ID from URL
     const params = new URLSearchParams(window.location.search);
@@ -46,11 +47,39 @@ document.addEventListener("DOMContentLoaded", function () {
                 const likesObserver = new LikesObserver(priceElement, photographerData);
                 displayPhotographerDetails(photographerData, Container);
                 displayPhotographerMedia(data, photographerData, MediaContainer, likesObserver);
+
+                // Attach event listener to each media item to open lightbox
+                const mediaItems = document.querySelectorAll('.media__item');
+                mediaItems.forEach((mediaItem, index) => {
+                    mediaItem.addEventListener('click', () => {
+                        const mediaData = getMediaDataForLightbox(data, photographerData);
+                        const lightbox = new Lightbox(mediaData);
+                        lightbox.currentIndex = index;
+                        lightbox.openLightBox();
+                    });
+                });
             }
         })
         .catch(error => {
             console.error('Error loading photographer data:', error);
         });
+
+    // Function to prepare media data for the lightbox
+    function getMediaDataForLightbox(data, photographerData) {
+        const photographerName = photographerData.name.split(' ')[0];
+        const mediaData = [];
+        data.media.forEach(mediaItem => {
+            if (mediaItem.photographerId === photographerData.id) {
+                mediaData.push({
+                    type: mediaItem.image ? 'image' : 'video',
+                    url: `../../assets/photographers/${photographerName}/${mediaItem.image || mediaItem.video}`,
+                    title: mediaItem.title,
+                    likes: mediaItem.likes
+                });
+            }
+        });
+        return mediaData;
+    }
 
     // Function to display media
     function displayPhotographerMedia(data, photographerData, MediaContainer, observer) {
@@ -142,11 +171,16 @@ document.addEventListener("DOMContentLoaded", function () {
         img.setAttribute("aria-label", "Portrait of " + photographerData.name);
         img.classList.add('photograph__header--img');
 
+        const name = document.createElement('h2');
+        name.textContent = photographerData.name;
+        name.setAttribute("aria-label", photographerData.name);
+
         // Add elements to the container
         DetailsContainer.appendChild(h2);
         DetailsContainer.appendChild(h3);
         DetailsContainer.appendChild(h4);
         ImgContainer.appendChild(img);
+        modalHeader.appendChild(name);
     }
 
     // Keyboard navigation

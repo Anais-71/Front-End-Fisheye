@@ -35,7 +35,7 @@
       <header class="contact__modal--header">
         <h2>Contactez-moi</h2>
         <img class="contact__modal--close" src="assets/icons/close.svg" onclick="closeModal()"
-          alt="Bouton de fermeture du formulaire" />
+          alt="Bouton de fermeture du formulaire">
       </header>
       <form class="contact__modal--form" aria-hidden="true">
         <fieldset>
@@ -64,8 +64,22 @@
       </form>
     </div>
   </div>
+  <div class="lightbox">
+    <button class="lightbox__close" onclick="closeLightBox()" aria-label="Bouton de fermeture du caroussel">
+      <svg class="custom-svg" width="32" height="32" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M42 4.23L37.77 0L21 16.77L4.23 0L0 4.23L16.77 21L0 37.77L4.23 42L21 25.23L37.77 42L42 37.77L25.23 21L42 4.23Z" fill="#901C1C"/>
+    </svg>
+    </button>
+      <img class="lightbox__next" src="assets/icons/expand_more-24px 5.svg"
+    alt="Passer au média suivant">
+    <img class="lightbox__prev" src="assets/icons/expand_more-24px 4.svg"
+    alt="Revenir au média précédent">
+    <div class="lightbox__title"></div>
+    <div class="lightbox__container"></div>
+  </div>
   <script src="/scripts/pages/photographer.js"></script>
   <script src="/scripts/utils/contactForm.js"></script>
+  <script src="/scripts/models/lightbox.js"></script>
 </body>
 
 </html>
