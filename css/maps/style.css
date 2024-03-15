@@ -1,9 +1,3 @@
-@import "../utils/utils.css";
-
-.contact__modal {
-  display: none;
-}
-
 .photograph__header {
   background-color: #FAFAFA;
   height: 300px;
@@ -78,6 +72,7 @@
   overflow: hidden;
   object-fit: cover;
   border-radius: 5px;
+  cursor: pointer;
 }
 .media .media__item--desc {
   display: flex;
@@ -106,6 +101,7 @@
 }
 .media .media__item--desc--fav {
   color: #901C1C;
+  cursor: pointer;
 }
 
 .price {
@@ -143,40 +139,131 @@
   display: none;
 }
 .contact__modal {
-  border-radius: 5px;
-  width: 669px;
-  height: 900px;
+  width: 40%;
+  height: 88%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  padding: 35px;
-  margin: auto;
-  position: absolute;
-  top: 50%;
-  left: 50%;
   transform: translate(-50%, -50%);
   background-color: #DB8876;
-  padding: 20px;
+  padding: 35px;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
+.contact__modal--close {
+  position: absolute;
+  right: 35px;
+}
 .contact__modal--header {
-  justify-content: space-between;
-  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: flex-start;
+  flex-direction: row;
 }
 .contact__modal--header img {
   cursor: pointer;
 }
 .contact__modal--header h2 {
-  font-size: 4rem;
+  font-size: 2.8rem;
+  font-weight: 400;
+  margin: 0px;
+  width: 100%;
 }
 .contact__modal--form fieldset {
   border: none;
+  display: flex;
+  flex-direction: column;
+}
+.contact__modal--form fieldset input {
+  border-radius: 5px;
+  background: #FFF;
+  width: 567px;
+  height: 50px;
+  border: none;
+  margin-bottom: 5px;
+}
+.contact__modal--form fieldset label {
+  color: #312E2E;
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+.contact__modal--form fieldset textarea {
+  width: 567px;
+  height: 80px;
+  border: none;
+  border-radius: 5px;
+}
+.contact__button {
+  width: 170px;
+  height: 65px;
+  color: #FFF;
+  border-radius: 5px;
+  background-color: #901C1C;
+  border: none;
+  text-align: center;
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-left: 12px;
 }
 
-.hidden {
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #fff;
   display: none;
+}
+.lightbox svg {
+  fill: #901C1C;
+}
+.lightbox__close {
+  position: absolute;
+  right: 346px;
+  top: 69px;
+  cursor: pointer;
+  background-color: #FFF;
+  border: none;
+}
+.lightbox__next {
+  position: absolute;
+  top: 45%;
+  right: 320px;
+  cursor: pointer;
+}
+.lightbox__prev {
+  position: absolute;
+  top: 45%;
+  left: 305px;
+  cursor: pointer;
+}
+.lightbox__container {
+  width: 45%;
+  height: 80%;
+  border-radius: 5px;
+  position: absolute;
+  top: 10%;
+  left: 27%;
+  overflow: hidden;
+}
+.lightbox__container img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+.lightbox__container video {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+.lightbox__title {
+  color: #901C1C;
+  font-size: 1.5rem;
+  position: absolute;
+  bottom: 5%;
+  left: 27%;
 }
 
 body {
@@ -226,6 +313,7 @@ h1 {
   width: 200px;
   border-radius: 50%;
   overflow: hidden;
+  cursor: pointer;
 }
 .photographer__section--article--name {
   color: #D3573C;

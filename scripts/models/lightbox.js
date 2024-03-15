@@ -1,6 +1,6 @@
 class Lightbox {
-    constructor(mediaData) {
-        this.currentIndex = 0;
+    constructor(mediaData, initialIndex) {
+        this.currentIndex = initialIndex;
         this.mediaItems = mediaData;
 
         // DOM Elements
@@ -34,6 +34,7 @@ class Lightbox {
 
     openLightBox() {
         this.mainContainer.style.display = 'block';
+        this.render();
     }
 
     closeLightBox() {

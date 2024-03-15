@@ -4,7 +4,18 @@ class LikesObserver {
         this.totalLikes = 0;
         this.priceElement = priceElement;
         this.photographerData = photographerData;
+        this.userLiked = false; // Variable to track whether user has already liked
         this.updatePrice();
+        this.priceElement.addEventListener('click', this.like.bind(this));
+    }
+
+    // Function to manage likes
+    like() {
+        if (!this.userLiked) { // Check if user already liked
+            this.totalLikes++; // Add likes
+            this.userLiked = true; // Track user as already liked
+            this.updatePrice();
+        }
     }
 
     // Update the total likes and display it
@@ -49,15 +60,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 displayPhotographerMedia(data, photographerData, MediaContainer, likesObserver);
 
                 // Attach event listener to each media item to open lightbox
-                const mediaItems = document.querySelectorAll('.media__item');
+                const mediaItems = document.querySelectorAll('.media__item--media');
                 mediaItems.forEach((mediaItem, index) => {
                     mediaItem.addEventListener('click', () => {
                         const mediaData = getMediaDataForLightbox(data, photographerData);
-                        const lightbox = new Lightbox(mediaData);
-                        lightbox.currentIndex = index;
+                        const lightbox = new Lightbox(mediaData, index);
                         lightbox.openLightBox();
                     });
-                });
+                });                
             }
         })
         .catch(error => {
@@ -182,22 +192,4 @@ document.addEventListener("DOMContentLoaded", function () {
         ImgContainer.appendChild(img);
         modalHeader.appendChild(name);
     }
-
-    // Keyboard navigation
-    Container.setAttribute('tabindex', '0');
-    Container.addEventListener('keydown', (event) => {
-        if (event.key === 'ArrowRight') {
-            event.preventDefault();
-            const nextPhotographer = Container.nextElementSibling;
-            if (nextPhotographer) {
-                nextPhotographer.focus();
-            }
-        } else if (event.key === 'ArrowLeft') {
-            event.preventDefault();
-            const prevPhotographer = Container.previousElementSibling;
-            if (prevPhotographer) {
-                prevPhotographer.focus();
-            }
-        }
-    });
 });
