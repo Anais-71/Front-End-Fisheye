@@ -4,34 +4,49 @@ class LikesObserver {
         this.totalLikes = 0;
         this.priceElement = priceElement;
         this.photographerData = photographerData;
-        this.userLiked = false; // Variable to track whether user has already liked
         this.updatePrice();
         this.priceElement.addEventListener('click', this.like.bind(this));
+        this.likedContentIds = this.getLikedContentIdsFromLocalStorage(); // Récupère les IDs des contenus déjà aimés depuis le stockage local
     }
 
-    // Function to manage likes
     like() {
-        if (!this.userLiked) { // Check if user already liked
-            this.totalLikes++; // Add likes
-            this.userLiked = true; // Track user as already liked
+        const contentId = this.photographerData.id;
+        
+        // Vérifie si l'utilisateur a déjà aimé ce contenu en vérifiant le stockage local
+        if (!this.isContentLikedByUser(contentId)) {
+            this.totalLikes++;
             this.updatePrice();
+            this.addLikedContentIdToLocalStorage(contentId);
         }
     }
 
-    // Update the total likes and display it
     update(likes) {
         this.totalLikes = likes;
         this.updatePrice();
     }
 
-    // Update element with total likes
     updatePrice() {
         const photographerPrice = this.photographerData.price;
         this.priceElement.innerHTML = `${this.totalLikes}   
         <span class="price__fav" aria-label="Icône coeur"><i class="fa-solid fa-heart"></i></span> 
         <span class="price__wrapper" aria-label="Prix journalier ${photographerPrice} euros par jour">${photographerPrice} € / jour</span>`;
     }
+
+    getLikedContentIdsFromLocalStorage() {
+        const likedContentIdsString = localStorage.getItem('likedContentIds');
+        return likedContentIdsString ? JSON.parse(likedContentIdsString) : [];
+    }
+
+    isContentLikedByUser(contentId) {
+        return this.likedContentIds.includes(contentId);
+    }
+
+    addLikedContentIdToLocalStorage(contentId) {
+        this.likedContentIds.push(contentId);
+        localStorage.setItem('likedContentIds', JSON.stringify(this.likedContentIds));
+    }
 }
+
 
 // Main function
 document.addEventListener("DOMContentLoaded", function () {
@@ -106,6 +121,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 img.setAttribute('src', `../../assets/photographers/${photographerName}/${mediaItem.image}`);
                 img.setAttribute('alt', mediaItem.title);
                 img.setAttribute('aria-label', mediaItem.title);
+                img.setAttribute('tabindex', 0);
                 img.classList.add('media__item--media');
                 mediaItemContainer.appendChild(img);
             } else if (mediaItem.video) {
@@ -114,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 vid.setAttribute('alt', mediaItem.title);
                 vid.setAttribute('aria-label', mediaItem.title);
                 vid.setAttribute('controls', true);
-                vid.setAttribute('tab-index', 0);
+                vid.setAttribute('tabindex', 0);
                 vid.classList.add('media__item--media');
                 mediaItemContainer.appendChild(vid);
             }
@@ -132,6 +148,7 @@ document.addEventListener("DOMContentLoaded", function () {
             fav.setAttribute('alt', "Like icon");
             fav.setAttribute('aria-label', "Like icon");
             fav.classList.add('media__item--desc--fav');
+            fav.setAttribute('tabindex', 0);
 
             const likes = document.createElement('span');
             const likesCount = String(mediaItem.likes).match(/\d+/)[0];

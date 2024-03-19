@@ -56,6 +56,9 @@
   left: 535px;
   right: 535px;
 }
+.photograph__header--button:hover {
+  background-color: #D3573C;
+}
 
 .hidden {
   display: none;
@@ -106,6 +109,9 @@
 .media .media__item--desc--fav {
   color: #901C1C;
   cursor: pointer;
+}
+.media .media__item--desc--fav:hover {
+  color: #D3573C;
 }
 
 .price {
@@ -210,6 +216,84 @@
   font-size: 1.125rem;
   font-weight: 700;
   margin-left: 12px;
+  cursor: pointer;
+}
+
+.filter {
+  margin-left: 100px;
+  margin-top: 9px;
+  margin-bottom: 23px;
+  display: flex;
+  flex-direction: row;
+}
+.filter__title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-right: 25px;
+}
+.filter__dropdown {
+  position: relative;
+  display: inline-block;
+  width: 170px;
+  color: white;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  background-color: #901C1C;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.filter__dropdown--btn {
+  color: white;
+  font-size: 1.125rem;
+  font-weight: 700;
+  text-decoration: none;
+  width: 170px;
+  height: 69px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #901C1C;
+  border: none;
+  border-radius: 5px;
+  padding: 20px;
+}
+.filter__dropdown--btn:hover {
+  background-color: #D3573C;
+}
+.filter__dropdown--content {
+  display: none;
+  position: absolute;
+  width: 170px;
+  height: 128px;
+  color: white;
+  font-size: 1.125rem;
+  font-weight: 700;
+  text-decoration: none;
+  border: none;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  background-color: #901C1C;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.filter__dropdown--content a {
+  color: white;
+  padding: 20px;
+  text-decoration: none;
+  display: block;
+}
+.filter__dropdown--content a:hover {
+  background-color: #D3573C;
+}
+.filter__dropdown--divider {
+  display: none;
+  width: 150px;
+  background-color: #FFF;
+  height: 1px;
+  margin-left: 10px;
+}
+
+.filter__dropdown:hover .filter__dropdown-content {
+  display: block;
 }
 
 .lightbox {
