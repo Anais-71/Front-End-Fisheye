@@ -193,7 +193,7 @@ document.addEventListener("DOMContentLoaded", function () {
         h4.classList.add('photograph__header--details--tagline');
 
         const img = document.createElement('img');
-        img.setAttribute("src", "../../assets/photographers/" + photographerData.portrait);
+        img.setAttribute("src", "assets/photographers/" + photographerData.portrait);
         img.setAttribute("alt", "Portrait of " + photographerData.name);
         img.setAttribute("aria-label", "Portrait of " + photographerData.name);
         img.classList.add('photograph__header--img');
