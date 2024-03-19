@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (mediaItem.photographerId === photographerData.id) {
                 mediaData.push({
                     type: mediaItem.image ? 'image' : 'video',
-                    url: `../../assets/photographers/${photographerName}/${mediaItem.image || mediaItem.video}`,
+                    url: `assets/photographers/${photographerName}/${mediaItem.image || mediaItem.video}`,
                     title: mediaItem.title,
                     likes: mediaItem.likes
                 });
@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (mediaItem.image) {
                 const img = document.createElement('img');
-                img.setAttribute('src', `../../assets/photographers/${photographerName}/${mediaItem.image}`);
+                img.setAttribute('src', `assets/photographers/${photographerName}/${mediaItem.image}`);
                 img.setAttribute('alt', mediaItem.title);
                 img.setAttribute('aria-label', mediaItem.title);
                 img.setAttribute('tabindex', 0);
@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 mediaItemContainer.appendChild(img);
             } else if (mediaItem.video) {
                 const vid = document.createElement('video');
-                vid.setAttribute('src', `../../assets/photographers/${photographerName}/${mediaItem.video}`);
+                vid.setAttribute('src', `assets/photographers/${photographerName}/${mediaItem.video}`);
                 vid.setAttribute('alt', mediaItem.title);
                 vid.setAttribute('aria-label', mediaItem.title);
                 vid.setAttribute('controls', true);
