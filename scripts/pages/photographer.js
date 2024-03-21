@@ -1,22 +1,21 @@
-// Observer class to track changes in media likes
 class LikesObserver {
     constructor(priceElement, photographerData) {
         this.totalLikes = 0;
         this.priceElement = priceElement;
         this.photographerData = photographerData;
+        this.likedContentIds = this.getLikedContentIdsFromLocalStorage(); // Récupère les IDs des contenus déjà aimés depuis le stockage local
         this.updatePrice();
         this.priceElement.addEventListener('click', this.like.bind(this));
-        this.likedContentIds = this.getLikedContentIdsFromLocalStorage(); // Récupère les IDs des contenus déjà aimés depuis le stockage local
     }
 
     like() {
         const contentId = this.photographerData.id;
-        
+
         // Vérifie si l'utilisateur a déjà aimé ce contenu en vérifiant le stockage local
         if (!this.isContentLikedByUser(contentId)) {
             this.totalLikes++;
+            this.addLikedContentIdToLocalStorage(contentId); // Ajouter l'ID avant d'incrémenter le totalLikes
             this.updatePrice();
-            this.addLikedContentIdToLocalStorage(contentId);
         }
     }
 
@@ -46,6 +45,7 @@ class LikesObserver {
         localStorage.setItem('likedContentIds', JSON.stringify(this.likedContentIds));
     }
 }
+
 
 
 // Main function
@@ -215,4 +215,5 @@ document.addEventListener("DOMContentLoaded", function () {
         ImgContainer.appendChild(img);
         modalHeader.appendChild(name);
     }
+
 });
