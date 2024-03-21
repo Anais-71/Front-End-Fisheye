@@ -28,8 +28,8 @@
 
     <div class="filter">
       <p class="filter__title">Trier par</p>
-      <div class="filter__dropdown" aria-label="Menu Dropdown">
-        <button id="elements" class="filter__dropdown--btn" aria-haspopup="true" aria-expanded="false"
+      <div class="filter__dropdown" aria-label="Menu déroulant">
+        <button id="first_element" class="filter__dropdown--btn" aria-haspopup="true" aria-expanded="false"
           onkeydown="if(event.key === 'Enter' || event.key === ' ') { if(event.key === 'Enter' || event.key === ' ') { dropdownInstance.openDropdown(); }}"
           role="button">
           Popularité
@@ -39,10 +39,10 @@
           </svg>
         </button>
         <div class="filter__dropdown--divider" role="separator"></div>
-        <div class="filter__dropdown--content" aria-label="Menu Items">
-          <a id="elements" href="#">Date</a>
+        <div class="filter__dropdown--content" aria-label="Rubriques du menu">
+          <a id="sec_element" href="#">Date</a>
           <div class="filter__dropdown--divider" role="separator"></div>
-          <a id="elements" href="#">Titre</a>
+          <a id="third_element" href="#">Titre</a>
         </div>
       </div>
     </div>
@@ -84,7 +84,7 @@
           </div>
         </fieldset>
 
-        <button class="contact__button" aria-label="Envoyer le message" role="button" tabindex="0">Envoyer</button>
+        <button class="contact__button" aria-label="Envoyer le message" tabindex="0">Envoyer</button>
       </form>
     </div>
   </div>
@@ -97,8 +97,8 @@
           fill="#901C1C" />
       </svg>
     </button>
-    <img class="lightbox__next" src="assets/icons/expand_more-24px 5.svg" alt="Passer au média suivant">
-    <img class="lightbox__prev" src="assets/icons/expand_more-24px 4.svg" alt="Revenir au média précédent">
+    <img class="lightbox__next" src="assets/icons/expand_more-24px_5.svg" alt="Passer au média suivant">
+    <img class="lightbox__prev" src="assets/icons/expand_more-24px_4.svg" alt="Revenir au média précédent">
     <div class="lightbox__title" role="heading" aria-level="2"></div>
     <div class="lightbox__container" role="group" aria-label="Contenu de la lightbox"></div>
   </div>
