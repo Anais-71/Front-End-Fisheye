@@ -17,44 +17,49 @@
       <img src="assets/images/logo.png" class="logo" alt="fisheye logo">
     </a>
   </header>
+
   <main id="main">
     <div class="photograph__header">
-      <div class="photograph__header--details"></div>
+      <div class="photograph__header--details" role="contentinfo"></div>
       <button class="photograph__header--button" onclick="displayModal()" aria-label="Ouvrir la fenêtre de contact"
-        role="button" onkeydown="if(event.keyCode===13 || event.keyCode===32){displayModal();}"
-        tabindex="0">Contactez-moi</button>
-      <div class="photograph__header--img"></div>
+        role="button" onkeydown="if (event.key === 'Enter' || event.key === ' '){displayModal();}" tabindex="0">Contactez-moi</button>
+      <div class="photograph__header--img" role="img" aria-label="Image du photographe"></div>
     </div>
+
     <div class="filter">
       <p class="filter__title">Trier par</p>
       <div class="filter__dropdown" aria-label="Menu Dropdown">
-        <button class="filter__dropdown--btn" aria-haspopup="true" aria-expanded="false"
-          onclick="dropdownInstance.openDropdown()">Popularité
+        <button id="elements" class="filter__dropdown--btn" aria-haspopup="true" aria-expanded="false"
+          onkeydown="if(event.key === 'Enter' || event.key === ' ') { if(event.key === 'Enter' || event.key === ' ') { dropdownInstance.openDropdown(); }}"
+          role="button">
+          Popularité
           <svg class="filter__dropdown--icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"
             fill="none">
             <path d="M9.88 11.4534L16 17.56L22.12 11.4534L24 13.3334L16 21.3334L8 13.3334L9.88 11.4534Z" fill="white" />
           </svg>
         </button>
-        <div class="filter__dropdown--divider"></div>
+        <div class="filter__dropdown--divider" role="separator"></div>
         <div class="filter__dropdown--content" aria-label="Menu Items">
-          <a href="#">Date</a>
-          <div class="filter__dropdown--divider"></div>
-          <a href="#">Titre</a>
+          <a id="elements" href="#">Date</a>
+          <div class="filter__dropdown--divider" role="separator"></div>
+          <a id="elements" href="#">Titre</a>
         </div>
       </div>
     </div>
-    <div class="media">
-    </div>
-    <div class="price">
-    </div>
+
+    <div class="media" role="region" aria-label="Contenu multimédia"></div>
+    <div class="price" role="complementary" aria-label="Informations sur les prix"></div>
   </main>
-  <div class="contact" id="contact_modal">
+
+  <div class="contact" id="contact_modal" role="dialog" aria-modal="true">
     <div class="contact__modal">
+
       <header class="contact__modal--header">
         <h2>Contactez-moi</h2>
         <img class="contact__modal--close" src="assets/icons/close.svg" onclick="closeModal()"
           alt="Bouton de fermeture du formulaire">
       </header>
+
       <form class="contact__modal--form" aria-hidden="true">
         <fieldset>
           <legend class="hidden">Informations personnelles</legend>
@@ -69,6 +74,7 @@
             <input type="email" id="email" name="email" aria-labelledby="email-label" placeholder="Adresse email">
           </div>
         </fieldset>
+
         <fieldset>
           <legend class="hidden">Votre message</legend>
           <div class="contact__modal--form__message">
@@ -77,11 +83,13 @@
               placeholder="Entrez ici votre message"></textarea>
           </div>
         </fieldset>
+
         <button class="contact__button" aria-label="Envoyer le message" role="button" tabindex="0">Envoyer</button>
       </form>
     </div>
   </div>
-  <div class="lightbox">
+
+  <div class="lightbox" role="dialog" aria-modal="true">
     <button class="lightbox__close" onclick="closeLightBox()" aria-label="Bouton de fermeture du caroussel">
       <svg class="custom-svg" width="32" height="32" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
@@ -91,15 +99,17 @@
     </button>
     <img class="lightbox__next" src="assets/icons/expand_more-24px 5.svg" alt="Passer au média suivant">
     <img class="lightbox__prev" src="assets/icons/expand_more-24px 4.svg" alt="Revenir au média précédent">
-    <div class="lightbox__title"></div>
-    <div class="lightbox__container"></div>
+    <div class="lightbox__title" role="heading" aria-level="2"></div>
+    <div class="lightbox__container" role="group" aria-label="Contenu de la lightbox"></div>
   </div>
+
+  
   <script src="scripts/pages/photographer.js"></script>
   <script src="scripts/utils/contactForm.js"></script>
   <script src="scripts/utils/keyboardNav.js"></script>
   <script src="scripts/models/lightbox.js"></script>
   <script src="scripts/models/dropdown.js" defer></script>
-  <script src="scripts/templates/filter.js"></script>
+  <script src="scripts/templates/sorting.js"></script>
 </body>
 
 </html>

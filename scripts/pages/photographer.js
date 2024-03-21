@@ -143,6 +143,11 @@ document.addEventListener("DOMContentLoaded", function () {
             title.setAttribute('aria-label', "title of the content: " + mediaItem.title)
             title.classList.add('media__item--desc--title');
 
+            const date = document.createElement('p'); //hidden - date recovered for filter needs
+            date.textContent = mediaItem.date;
+            date.style.display = "none";
+            date.classList.add('media__item--desc--date');
+
             const fav = document.createElement('i');
             fav.classList.add('fa-solid', 'fa-heart');
             fav.setAttribute('alt', "Like icon");
@@ -166,6 +171,7 @@ document.addEventListener("DOMContentLoaded", function () {
             descContainer.appendChild(title);
             descContainer.appendChild(likes);
             descContainer.appendChild(fav);
+            descContainer.appendChild(date);
 
             mediaItemContainer.appendChild(descContainer);
             MediaContainer.appendChild(mediaItemContainer);

@@ -1,8 +1,8 @@
 document.addEventListener('keydown', function(event) {
-    if (event.key === 'Tab' && !event.shiftKey || event.key === 'ArrowRight') {
-        focusNextElement(); // Focus next element with Tab or right arrow
-    } else if (event.key === 'Tab' && event.shiftKey || event.key === 'ArrowLeft') { 
-        focusPreviousElement(); // Focus previous element with Tab + Shift or left arrow
+    if (event.key === 'ArrowRight') {
+        focusNextElement(); // Focus next element with right arrow
+    } else if (event.key === 'ArrowLeft') { 
+        focusPreviousElement(); // Focus previous element with left arrow
     } else if (event.key === 'Enter' || event.key === ' ') {
         click(); // Click with Enter or space
     }

@@ -225,6 +225,7 @@
   margin-bottom: 23px;
   display: flex;
   flex-direction: row;
+  z-index: 100000;
 }
 .filter__title {
   font-size: 1.125rem;

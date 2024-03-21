@@ -17,7 +17,9 @@ function photographerTemplate(data) {
         const article = document.createElement('article');
         article.classList.add('photographer__section--article');
         article.setAttribute('tabindex', 0);
+        article.setAttribute('role', 'article');
         article.addEventListener('click', redirectToPhotographerPage)
+        article.focus()
         
         // Recover image
         const img = document.createElement('img');
