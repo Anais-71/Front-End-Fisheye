@@ -134,6 +134,12 @@
     }
 }
 
+.liked {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+
 .price {
     background-color: $box-background;
     width: 376px;

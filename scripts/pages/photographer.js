@@ -1,56 +1,75 @@
+// Class for managing likes
 class LikesObserver {
     constructor(priceElement, photographerData) {
+        // Initialize total likes
         this.totalLikes = 0;
         this.priceElement = priceElement;
         this.photographerData = photographerData;
-        this.likedContentIds = this.getLikedContentIdsFromLocalStorage(); // Récupère les IDs des contenus déjà aimés depuis le stockage local
-        this.updatePrice();
-        this.priceElement.addEventListener('click', this.like.bind(this));
+        this.likedContentIds = this.getLikedContentIdsFromLocalStorage(); // Retrieves IDs of already liked content from local storage
+        this.updatePrice(); // Updates the displayed price with current total likes
+        // Attach event listener to the price element for toggling likes
+        this.priceElement.addEventListener('click', this.toggleLike.bind(this));
     }
 
-    like() {
+    // Method to toggle like for the photographer's content
+    toggleLike() {
         const contentId = this.photographerData.id;
 
-        // Vérifie si l'utilisateur a déjà aimé ce contenu en vérifiant le stockage local
-        if (!this.isContentLikedByUser(contentId)) {
+        // If the content is already liked, remove like; otherwise, add like
+        if (this.isContentLikedByUser(contentId)) {
+            this.removeLikedContentIdFromLocalStorage(contentId);
+            this.totalLikes--;
+        } else {
+            this.addLikedContentIdToLocalStorage(contentId);
             this.totalLikes++;
-            this.addLikedContentIdToLocalStorage(contentId); // Ajouter l'ID avant d'incrémenter le totalLikes
-            this.updatePrice();
         }
+
+        this.updatePrice();
     }
 
+    // Method to update total likes
     update(likes) {
         this.totalLikes = likes;
         this.updatePrice();
     }
 
+    // Method to update the displayed price based on total likes
     updatePrice() {
         const photographerPrice = this.photographerData.price;
         this.priceElement.innerHTML = `${this.totalLikes}   
-        <span class="price__fav" aria-label="Icône coeur"><i class="fa-solid fa-heart"></i></span> 
-        <span class="price__wrapper" aria-label="Prix journalier ${photographerPrice} euros par jour">${photographerPrice} € / jour</span>`;
+        <span class="price__fav" aria-label="Heart icon"><i class="fa-solid fa-heart"></i></span> 
+        <span class="price__wrapper" aria-label="Daily price ${photographerPrice} euros per day">${photographerPrice} € / day</span>`;
     }
 
+    // Method to retrieve liked content IDs from local storage
     getLikedContentIdsFromLocalStorage() {
         const likedContentIdsString = localStorage.getItem('likedContentIds');
         return likedContentIdsString ? JSON.parse(likedContentIdsString) : [];
     }
 
+    // Method to check if content is liked by user
     isContentLikedByUser(contentId) {
         return this.likedContentIds.includes(contentId);
     }
 
+    // Method to add content ID to liked content IDs in local storage
     addLikedContentIdToLocalStorage(contentId) {
         this.likedContentIds.push(contentId);
         localStorage.setItem('likedContentIds', JSON.stringify(this.likedContentIds));
     }
+
+    // Method to remove content ID from liked content IDs in local storage
+    removeLikedContentIdFromLocalStorage(contentId) {
+        const index = this.likedContentIds.indexOf(contentId);
+        if (index !== -1) {
+            this.likedContentIds.splice(index, 1);
+            localStorage.setItem('likedContentIds', JSON.stringify(this.likedContentIds));
+        }
+    }
 }
 
-
-
-// Main function
+// Wait for DOM content to be loaded before executing
 document.addEventListener("DOMContentLoaded", function () {
-    // Recovery of parent elements
     const Container = document.querySelector('.photograph__header');
     const DetailsContainer = document.querySelector('.photograph__header--details');
     const ImgContainer = document.querySelector('.photograph__header--img');
@@ -58,19 +77,20 @@ document.addEventListener("DOMContentLoaded", function () {
     const priceElement = document.querySelector('.price');
     const modalHeader = document.querySelector('.contact__modal--header');
 
-    // Recovery of photographer ID from URL
+    // Retrieve photographer ID from URL parameters
     const params = new URLSearchParams(window.location.search);
     const photographerId = params.get('photographer_id');
 
-    // Recovery and display of photographers' data
+    // Fetch photographer data from JSON file and process
     fetch(`https://anais-71.github.io/Front-End-Fisheye/data/photographers.json`)
         .then(response => response.json())
         .then(data => {
-            // Find the photographer data by ID
+            // Find photographer data by ID
             const photographerData = data.photographers.find(photographer => photographer.id === parseInt(photographerId));
             if (photographerData) {
-                // Creation of the likes observer within the .price div
+                // Create LikesObserver instance within the price element
                 const likesObserver = new LikesObserver(priceElement, photographerData);
+                // Display photographer details and media
                 displayPhotographerDetails(photographerData, Container);
                 displayPhotographerMedia(data, photographerData, MediaContainer, likesObserver);
 
@@ -108,9 +128,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Function to display media
     function displayPhotographerMedia(data, photographerData, MediaContainer, observer) {
-        const photographerName = photographerData.name.split(/[\s]+/)[0];
+        const photographerName = photographerData.name.split(' ')[0];
         let totalLikes = 0;
 
+        // Filter media by photographer ID and display each item
         const filteredMedia = data.media.filter(media => media.photographerId === photographerData.id);
         filteredMedia.forEach(mediaItem => {
             const mediaItemContainer = document.createElement('div');
@@ -135,15 +156,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 mediaItemContainer.appendChild(vid);
             }
 
+            // Create description elements for the media item
             const descContainer = document.createElement('div');
             descContainer.classList.add('media__item--desc');
 
             const title = document.createElement('h3');
             title.textContent = mediaItem.title;
-            title.setAttribute('aria-label', "title of the content: " + mediaItem.title)
+            title.setAttribute('aria-label', "Title of the content: " + mediaItem.title);
             title.classList.add('media__item--desc--title');
 
-            const date = document.createElement('p'); //hidden - date recovered for filter needs
+            const date = document.createElement('p'); // hidden - date recovered for sorting needs
             date.textContent = mediaItem.date;
             date.style.display = "none";
             date.classList.add('media__item--desc--date');
@@ -158,16 +180,21 @@ document.addEventListener("DOMContentLoaded", function () {
             const likes = document.createElement('span');
             const likesCount = String(mediaItem.likes).match(/\d+/)[0];
             likes.textContent = likesCount;
-            likes.setAttribute('aria-label', "number of likes " + likesCount);
+            likes.setAttribute('aria-label', "Number of likes: " + likesCount);
             likes.classList.add('media__item--desc--likes');
 
+            // Event listener to handle liking of media items
             fav.addEventListener('click', () => {
-                mediaItem.likes++;
-                totalLikes++;
-                observer.update(totalLikes);
-                likes.textContent = mediaItem.likes;
+                if (!fav.classList.contains('liked')) { 
+                    mediaItem.likes++;
+                    totalLikes++;
+                    observer.update(totalLikes);
+                    likes.textContent = mediaItem.likes;
+                    fav.classList.add('liked');
+                }
             });
 
+            // Append elements to media item container
             descContainer.appendChild(title);
             descContainer.appendChild(likes);
             descContainer.appendChild(fav);
@@ -177,12 +204,12 @@ document.addEventListener("DOMContentLoaded", function () {
             MediaContainer.appendChild(mediaItemContainer);
             totalLikes += mediaItem.likes;
         });
-        observer.update(totalLikes);
+        observer.update(totalLikes); // Update total likes count displayed in observer
     }
 
     // Function to display photographer details
     function displayPhotographerDetails(photographerData, container) {
-        // Elements recovery and creation
+        // Create and append elements for photographer details
         const h2 = document.createElement('h2');
         h2.textContent = photographerData.name;
         h2.setAttribute("aria-label", photographerData.name);
@@ -190,7 +217,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const h3 = document.createElement('h3');
         h3.textContent = photographerData.city + ", " + photographerData.country;
-        h3.setAttribute("aria-label", "Location of " + photographerData.name + ":" + photographerData.city + ", " + photographerData.country);
+        h3.setAttribute("aria-label", "Location of " + photographerData.name + ": " + photographerData.city + ", " + photographerData.country);
         h3.classList.add('photograph__header--details--loc');
 
         const h4 = document.createElement('h4');
@@ -208,12 +235,11 @@ document.addEventListener("DOMContentLoaded", function () {
         name.textContent = photographerData.name;
         name.setAttribute("aria-label", photographerData.name);
 
-        // Add elements to the container
+        // Append elements to the container
         DetailsContainer.appendChild(h2);
         DetailsContainer.appendChild(h3);
         DetailsContainer.appendChild(h4);
         ImgContainer.appendChild(img);
         modalHeader.appendChild(name);
     }
-
 });

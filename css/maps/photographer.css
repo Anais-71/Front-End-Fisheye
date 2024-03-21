@@ -114,6 +114,11 @@
   color: #D3573C;
 }
 
+.liked {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
 .price {
   background-color: #DB8876;
   width: 376px;
