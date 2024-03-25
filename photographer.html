@@ -20,35 +20,34 @@
 
   <main id="main">
     <div class="photograph__header">
-      <div class="photograph__header--details" role="contentinfo"></div>
+      <div class="photograph__header--details" role="informations"></div>
       <button class="photograph__header--button" onclick="displayModal()" aria-label="Ouvrir la fenêtre de contact"
-        role="button" onkeydown="if (event.key === 'Enter' || event.key === ' '){displayModal();}" tabindex="0">Contactez-moi</button>
-      <div class="photograph__header--img" role="img" aria-label="Image du photographe"></div>
+        onkeydown="if (event.key === 'Enter' || event.key === ' '){displayModal();}" tabindex="0">Contactez-moi</button>
+      <div class="photograph__header--img" role="image" aria-label="Image du photographe"></div>
     </div>
 
     <div class="filter">
       <p class="filter__title">Trier par</p>
       <div class="filter__dropdown" aria-label="Menu déroulant">
         <button id="first_element" class="filter__dropdown--btn" aria-haspopup="true" aria-expanded="false"
-          onkeydown="if(event.key === 'Enter' || event.key === ' ') { if(event.key === 'Enter' || event.key === ' ') { dropdownInstance.openDropdown(); }}"
-          role="button">
+          onkeydown="if(event.key === 'Enter' || event.key === ' ') { if(event.key === 'Enter' || event.key === ' ') { dropdownInstance.openDropdown(); }}">
           Popularité
-          <svg class="filter__dropdown--icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"
-            fill="none">
+          <svg class="filter__dropdown--icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+            viewBox="0 0 32 32" fill="none">
             <path d="M9.88 11.4534L16 17.56L22.12 11.4534L24 13.3334L16 21.3334L8 13.3334L9.88 11.4534Z" fill="white" />
           </svg>
         </button>
-        <div class="filter__dropdown--divider" role="separator"></div>
+        <div class="filter__dropdown--divider" role="séparateur"></div>
         <div class="filter__dropdown--content" aria-label="Rubriques du menu">
           <a id="sec_element" href="#">Date</a>
-          <div class="filter__dropdown--divider" role="separator"></div>
+          <div class="filter__dropdown--divider" role="séparateur"></div>
           <a id="third_element" href="#">Titre</a>
         </div>
       </div>
     </div>
 
-    <div class="media" role="region" aria-label="Contenu multimédia"></div>
-    <div class="price" role="complementary" aria-label="Informations sur les prix"></div>
+    <div class="media" role="section" aria-label="Contenu multimédia"></div>
+    <div class="price" role="complément" aria-label="Informations sur les prix"></div>
   </main>
 
   <div class="contact" id="contact_modal" role="dialog" aria-modal="true">
@@ -99,11 +98,11 @@
     </button>
     <img class="lightbox__next" src="assets/icons/expand_more-24px_5.svg" alt="Passer au média suivant">
     <img class="lightbox__prev" src="assets/icons/expand_more-24px_4.svg" alt="Revenir au média précédent">
-    <div class="lightbox__title" role="heading" aria-level="2"></div>
+    <div class="lightbox__title" role="titre" aria-level="2"></div>
     <div class="lightbox__container" role="group" aria-label="Contenu de la lightbox"></div>
   </div>
 
-  
+
   <script src="scripts/pages/photographer.js"></script>
   <script src="scripts/utils/contactForm.js"></script>
   <script src="scripts/models/lightbox.js"></script>

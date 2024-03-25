@@ -37,8 +37,8 @@ class LikesObserver {
     updatePrice() {
         const photographerPrice = this.photographerData.price;
         this.priceElement.innerHTML = `${this.totalLikes}   
-        <span class="price__fav" aria-label="Heart icon"><i class="fa-solid fa-heart"></i></span> 
-        <span class="price__wrapper" aria-label="Daily price ${photographerPrice} euros per day">${photographerPrice} € / day</span>`;
+        <span class="price__fav" aria-label="mentions j'aime"><i class="fa-solid fa-heart"></i></span> 
+        <span class="price__wrapper" aria-label="Prix journalier :">${photographerPrice} € / jour</span>`;
     }
 
     // Method to retrieve liked content IDs from local storage
@@ -140,6 +140,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (mediaItem.image) {
                 const img = document.createElement('img');
                 img.setAttribute('src', `assets/photographers/${photographerName}/${mediaItem.image}`);
+                img.setAttribute('lang', 'en');
                 img.setAttribute('alt', mediaItem.title);
                 img.setAttribute('aria-label', mediaItem.title);
                 img.setAttribute('tabindex', 0);
@@ -148,6 +149,7 @@ document.addEventListener("DOMContentLoaded", function () {
             } else if (mediaItem.video) {
                 const vid = document.createElement('video');
                 vid.setAttribute('src', `assets/photographers/${photographerName}/${mediaItem.video}`);
+                vid.setAttribute('lang', 'en');
                 vid.setAttribute('alt', mediaItem.title);
                 vid.setAttribute('aria-label', mediaItem.title);
                 vid.setAttribute('controls', true);
@@ -162,7 +164,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const title = document.createElement('h3');
             title.textContent = mediaItem.title;
-            title.setAttribute('aria-label', "Title of the content: " + mediaItem.title);
+            title.setAttribute('aria-hidden', 'true');
             title.classList.add('media__item--desc--title');
 
             const date = document.createElement('p'); // hidden - date recovered for sorting needs
@@ -172,15 +174,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const fav = document.createElement('i');
             fav.classList.add('fa-solid', 'fa-heart');
-            fav.setAttribute('alt', "Like icon");
-            fav.setAttribute('aria-label', "Like icon");
+            fav.setAttribute('alt', 'Bouton \"j\'aime\"');
+            fav.setAttribute('aria-label', 'Bouton \"j\'aime\"');
             fav.classList.add('media__item--desc--fav');
             fav.setAttribute('tabindex', 0);
 
             const likes = document.createElement('span');
             const likesCount = String(mediaItem.likes).match(/\d+/)[0];
             likes.textContent = likesCount;
-            likes.setAttribute('aria-label', "Number of likes: " + likesCount);
+            likes.setAttribute('aria-label', "Nombre de mentions \"j\'aime\"");
             likes.classList.add('media__item--desc--likes');
 
             // Event listener to handle liking of media items
@@ -217,18 +219,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const h3 = document.createElement('h3');
         h3.textContent = photographerData.city + ", " + photographerData.country;
-        h3.setAttribute("aria-label", "Location of " + photographerData.name + ": " + photographerData.city + ", " + photographerData.country);
+        h3.setAttribute("aria-label", "Localisation de " + photographerData.name + ": " + photographerData.city + ", " + photographerData.country);
         h3.classList.add('photograph__header--details--loc');
 
         const h4 = document.createElement('h4');
         h4.textContent = photographerData.tagline;
-        h4.setAttribute("aria-label", "Tagline of " + photographerData.name + ": " + photographerData.tagline);
+        h4.setAttribute("aria-label", "Slogan de " + photographerData.name + ": " + photographerData.tagline);
         h4.classList.add('photograph__header--details--tagline');
 
         const img = document.createElement('img');
         img.setAttribute("src", "assets/photographers/" + photographerData.portrait);
-        img.setAttribute("alt", "Portrait of " + photographerData.name);
-        img.setAttribute("aria-label", "Portrait of " + photographerData.name);
+        img.setAttribute("alt", "Portrait de " + photographerData.name);
+        img.setAttribute("aria-label", "Portrait de " + photographerData.name);
         img.classList.add('photograph__header--img');
 
         const name = document.createElement('h2');
