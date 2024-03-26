@@ -1,5 +1,5 @@
 //DOM elements
-const openButton = document.querySelector(".contact__button");
+const openButton = document.querySelector(".photograph__header--button");
 const closeButton = document.querySelector(".contact__modal--close");
 const header = document.querySelector(".header");
 const main = document.querySelector("main");
@@ -53,21 +53,21 @@ form.addEventListener('submit', function(event) {
     submitForm();
 });
 
+// Submit with enter key
+openButton.addEventListener('keydown', function(e) {
+    const key = e.key;
+
+    if (key === 'Enter' || key === ' ') {
+        e.preventDefault(); // Prevent default behavior (e.g., form submission)
+        displayModal(); // Display the modal instead of submitting the form
+    }
+});
+
 // Close modal with escape key
 document.addEventListener('keydown', e => {
     const key = e.key;
     if (form.getAttribute('aria-hidden') == 'false' && key === 'Escape') {
         closeModal();
-    }
-});
-
-// Submit with enter key
-form.addEventListener('keydown', e => {
-    const key = e.key;
-
-    if (key === 'Enter') {
-        e.preventDefault();
-        submitForm();
     }
 });
 
@@ -114,3 +114,23 @@ form.addEventListener('keydown', e => {
         }
     }
 });
+
+// Function to handle the keydown event on the contact button
+function handleContactButtonKeyDown(event) {
+    if (event.key === 'Enter' || event.key === ' ') {
+        displayModal();
+        event.preventDefault(); // Prevent the default behavior of the "Enter" key
+    }
+}
+
+// Function to handle the keydown event on the contact form
+function handleContactFormSubmit(event) {
+    if (event.key === 'Enter' || event.key === ' ') {
+        submitForm();
+        event.preventDefault(); // Prevent the default behavior of the "Enter" key
+    }
+}
+
+// Adding event listeners for key presses on the contact button and the contact form
+document.querySelector('.photograph__header--button').addEventListener('keydown', handleContactButtonKeyDown);
+document.querySelector('.contact__button').addEventListener('keydown', handleContactFormSubmit);

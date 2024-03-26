@@ -1,5 +1,5 @@
 // Generates the user card content for a photographer
-function photographerTemplate(data) {
+export function photographerTemplate(data) {
     const { name, id, city, country, tagline, price, portrait } = data;
 
     const picture = `assets/photographers/${portrait}`;

@@ -1,9 +1,10 @@
-class Lightbox {
+export default class Lightbox {
     constructor(mediaData, initialIndex) {
         this.currentIndex = initialIndex;
         this.mediaItems = mediaData;
 
         // DOM Elements
+        this.body = document.querySelector('main')
         this.mainContainer = document.querySelector('.lightbox');
         this.closeButton = document.querySelector('.lightbox__close');
         this.nextButton = document.querySelector('.lightbox__next');
@@ -15,12 +16,14 @@ class Lightbox {
         this.render();
     }
 
+    // Attach event listeners
     attachEvents() {
+        // Event listeners for buttons
         this.closeButton.addEventListener('click', () => this.closeLightBox());
         this.nextButton.addEventListener('click', () => this.next());
         this.prevButton.addEventListener('click', () => this.prev());
 
-        // keyboard navigation
+        // Keyboard navigation
         document.addEventListener('keydown', (event) => {
             if (event.key === 'ArrowLeft') {
                 this.prev();
@@ -32,25 +35,34 @@ class Lightbox {
         });
     }
 
+    // Open lightbox
     openLightBox() {
         this.mainContainer.style.display = 'block';
+        this.mainContainer.setAttribute('aria-hidden', 'false');
+        this.body.setAttribute('aria-hidden', 'true'); 
         this.render();
     }
 
+    // Close lightbox
     closeLightBox() {
         this.mainContainer.style.display = 'none';
+        this.mainContainer.setAttribute('aria-hidden', 'true');
+        this.body.setAttribute('aria-hidden', 'false'); 
     }
 
+    // Go to next item
     next() {
         this.currentIndex = (this.currentIndex + 1) % this.mediaItems.length;
         this.render();
     }
 
+    // Go to previous item
     prev() {
         this.currentIndex = (this.currentIndex - 1 + this.mediaItems.length) % this.mediaItems.length;
         this.render();
     }
 
+    // Render content
     render() {
         // Clear previous content
         this.mediaContainer.innerHTML = '';

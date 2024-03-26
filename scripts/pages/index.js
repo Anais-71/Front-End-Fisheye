@@ -1,3 +1,5 @@
+import { photographerTemplate } from '../templates/photographerCards.js';
+
 async function getPhotographers() {
     const response = await fetch('https://anais-71.github.io/Front-End-Fisheye/data/photographers.json');
     const photographers = await response.json();

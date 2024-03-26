@@ -1,3 +1,7 @@
+// Import class for images and videos creation
+import MediaFactory from '../factories/media.js';
+import Lightbox from '../models/lightbox.js';
+
 // Class for managing likes
 class LikesObserver {
     constructor(priceElement, photographerData) {
@@ -7,8 +11,6 @@ class LikesObserver {
         this.photographerData = photographerData;
         this.likedContentIds = this.getLikedContentIdsFromLocalStorage(); // Retrieves IDs of already liked content from local storage
         this.updatePrice(); // Updates the displayed price with current total likes
-        // Attach event listener to the price element for toggling likes
-        this.priceElement.addEventListener('click', this.toggleLike.bind(this));
     }
 
     // Method to toggle like for the photographer's content
@@ -71,7 +73,6 @@ class LikesObserver {
 // Wait for DOM content to be loaded before executing
 document.addEventListener("DOMContentLoaded", function () {
     const Container = document.querySelector('.photograph__header');
-    const DetailsContainer = document.querySelector('.photograph__header--details');
     const ImgContainer = document.querySelector('.photograph__header--img');
     const MediaContainer = document.querySelector('.media');
     const priceElement = document.querySelector('.price');
@@ -102,7 +103,15 @@ document.addEventListener("DOMContentLoaded", function () {
                         const lightbox = new Lightbox(mediaData, index);
                         lightbox.openLightBox();
                     });
-                });                
+
+                    mediaItem.addEventListener('keydown', function (event) {
+                        if (event.key === 'Enter' || event.key === ' ') {
+                            const mediaData = getMediaDataForLightbox(data, photographerData);
+                            const lightbox = new Lightbox(mediaData, index);
+                            lightbox.openLightBox();
+                        }
+                    });
+                });
             }
         })
         .catch(error => {
@@ -137,26 +146,8 @@ document.addEventListener("DOMContentLoaded", function () {
             const mediaItemContainer = document.createElement('div');
             mediaItemContainer.classList.add('media__item');
 
-            if (mediaItem.image) {
-                const img = document.createElement('img');
-                img.setAttribute('src', `assets/photographers/${photographerName}/${mediaItem.image}`);
-                img.setAttribute('lang', 'en');
-                img.setAttribute('alt', mediaItem.title);
-                img.setAttribute('aria-label', mediaItem.title);
-                img.setAttribute('tabindex', 0);
-                img.classList.add('media__item--media');
-                mediaItemContainer.appendChild(img);
-            } else if (mediaItem.video) {
-                const vid = document.createElement('video');
-                vid.setAttribute('src', `assets/photographers/${photographerName}/${mediaItem.video}`);
-                vid.setAttribute('lang', 'en');
-                vid.setAttribute('alt', mediaItem.title);
-                vid.setAttribute('aria-label', mediaItem.title);
-                vid.setAttribute('controls', true);
-                vid.setAttribute('tabindex', 0);
-                vid.classList.add('media__item--media');
-                mediaItemContainer.appendChild(vid);
-            }
+            const mediaElement = MediaFactory.createMediaElement(mediaItem, photographerName);
+            mediaItemContainer.appendChild(mediaElement);
 
             // Create description elements for the media item
             const descContainer = document.createElement('div');
@@ -174,25 +165,38 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const fav = document.createElement('i');
             fav.classList.add('fa-solid', 'fa-heart');
-            fav.setAttribute('alt', 'Bouton \"j\'aime\"');
-            fav.setAttribute('aria-label', 'Bouton \"j\'aime\"');
+            fav.setAttribute('alt', 'Bouton "j\'aime"');
+            fav.setAttribute('aria-label', 'Bouton "j\'aime"');
             fav.classList.add('media__item--desc--fav');
             fav.setAttribute('tabindex', 0);
 
             const likes = document.createElement('span');
             const likesCount = String(mediaItem.likes).match(/\d+/)[0];
             likes.textContent = likesCount;
-            likes.setAttribute('aria-label', "Nombre de mentions \"j\'aime\"");
+            likes.setAttribute('aria-label', 'Nombre de mentions "j\'aime"');
             likes.classList.add('media__item--desc--likes');
 
             // Event listener to handle liking of media items
             fav.addEventListener('click', () => {
-                if (!fav.classList.contains('liked')) { 
+                if (!fav.classList.contains('liked')) {
                     mediaItem.likes++;
                     totalLikes++;
                     observer.update(totalLikes);
                     likes.textContent = mediaItem.likes;
                     fav.classList.add('liked');
+                }
+            });
+
+            // Add keyboard event listener to handle liking of media items
+            fav.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    if (!fav.classList.contains('liked')) {
+                        mediaItem.likes++;
+                        totalLikes++;
+                        observer.update(totalLikes);
+                        likes.textContent = mediaItem.likes;
+                        fav.classList.add('liked');
+                    }
                 }
             });
 
@@ -238,9 +242,9 @@ document.addEventListener("DOMContentLoaded", function () {
         name.setAttribute("aria-label", photographerData.name);
 
         // Append elements to the container
-        DetailsContainer.appendChild(h2);
-        DetailsContainer.appendChild(h3);
-        DetailsContainer.appendChild(h4);
+        container.appendChild(h2);
+        container.appendChild(h3);
+        container.appendChild(h4);
         ImgContainer.appendChild(img);
         modalHeader.appendChild(name);
     }

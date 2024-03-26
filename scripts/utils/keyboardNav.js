@@ -8,6 +8,13 @@ document.addEventListener('keydown', function(event) {
     }
 });
 
+// eslint-disable-next-line no-unused-vars, no-undef
+function handleDropdownKeyDown(event) {
+    if (event.key === 'Enter' || event.key === ' ') {
+        dropdown.openDropdown();
+    }
+}
+
 function focusNextElement() {
     var focused = document.activeElement;
     if (focused.nextElementSibling) {
@@ -24,6 +31,7 @@ function focusPreviousElement() {
 
 function click() {
     var focused = document.activeElement;
+    // Ajuster la vérification selon vos besoins
     if (focused.tagName === 'BUTTON' || focused.tagName === 'A') {
         focused.click();
     } else {
