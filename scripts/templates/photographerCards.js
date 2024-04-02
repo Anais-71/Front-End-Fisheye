@@ -24,8 +24,8 @@ export function photographerTemplate(data) {
         // Recover image
         const img = document.createElement('img');
         img.setAttribute("src", picture)
-        img.setAttribute("alt", "Portrait of " + name);
-        img.setAttribute("aria-label", "Portrait of " + name)
+        img.setAttribute("alt", "Portrait de " + name);
+        img.setAttribute("aria-label", "Portrait de " + name)
         img.classList.add('photographer__section--article--img');
         
         // Recover name
@@ -43,19 +43,19 @@ export function photographerTemplate(data) {
         // Recover location
         const h3 = document.createElement('h3');
         h3.textContent = city + ", " + country;
-        h3.setAttribute("aria-label", "Location of " + name + ":" + city + ", " + country)
+        h3.setAttribute("aria-label", "Localisation de " + name + ":" + city + ", " + country)
         h3.classList.add('photographer__section--article--loc');
         
         // Recover tagline
         const h4 = document.createElement('h4');
         h4.textContent = tagline;
-        h4.setAttribute("aria-label", "Tagline of " + name + ":" + tagline)
+        h4.setAttribute("aria-label", "Slogan de " + name + ":" + tagline)
         h4.classList.add('photographer__section--article--tagline');
         
         // Recover price
         const p = document.createElement('p');
-        p.textContent = price + "€/day";
-        p.setAttribute("aria-label", "Daily price of " + name+ ":" + price)
+        p.textContent = price + "€/jour";
+        p.setAttribute("aria-label", "Prix journalier de " + name+ ":" + price)
         p.classList.add('photographer__section--article--price');
 
         // Create DOM elements
